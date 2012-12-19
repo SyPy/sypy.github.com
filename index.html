@@ -4,10 +4,235 @@
 
     <meta charset="UTF-8">
     <title>SyPy &mdash; Sydney Python User Group</title>
+    <script src="http://www.kevs3d.co.uk/dev/canvask3d/scripts/mathlib-min.js"></script>
+    <script src="http://www.brython.info/brython.js"></script>
+<script type="text/python">
+
+# converted from original js on http://www.kevs3d.co.uk/dev/eglogo/
+
+offsetx = 0
+offsety = 0
+
+# data structures
+
+def Vector3D(x=0,y=0,z=0):
+    obj = object()
+    obj.x = x
+    obj.y = y
+    obj.z = z
+    return obj
+
+def BlobList():
+    obj = object()
+    obj.mousex = 0
+    obj.mousey = 0
+    obj.blobs = []
+
+    def update(obj):
+        # special case for first blob - which is the main magenta disc
+        blob = obj.blobs[0]
+        if (Rnd() > 0.99):
+            blob.velocity.z += (Rnd() * 0.10 - 0.05)
+            blob.spring = 0.0125
+        blob.update()
+
+        # all the other blobs can animate based on mouse interaction
+        for i in range(1, obj.blobs.length):
+            blob = obj.blobs[i]
+
+            # calculate offset from mouse position - apply canvas element offset
+            dx = obj.mousex - (blob.position.x + offsetx)
+            dy = obj.mousey - (blob.position.y + offsety)
+            d = Sqrt(dx * dx + dy * dy)
+
+            # if the mouse is within the radius of a blog - then nudge it out
+            rad = (blob.originradius > 16) and blob.originradius or 16
+            if (d < rad):
+                blob.targetPos.x = blob.position.x - dx
+                blob.targetPos.y = blob.position.y - dy
+                blob.spring = 0.033
+            # else based on a random chance, pulse the blob
+            elif (Rnd() > 0.995):
+                blob.targetPos.x = blob.origin.x
+                blob.targetPos.y = blob.origin.y
+                blob.velocity.z += (Rnd() * 0.30 - 0.15)
+                blob.spring = 0.0125
+            # else just animate towards the original position
+            else:
+                blob.targetPos.x = blob.origin.x
+                blob.targetPos.y = blob.origin.y
+                blob.spring = 0.05
+
+            blob.update()
+
+    obj.update = update
+
+    def render(obj):
+        for i in range(0, obj.blobs.length):
+            ctx.save()
+            obj.blobs[i].render()
+            ctx.restore()
+
+    obj.render = render
+    return obj
+
+def Blob(x, y, z, radius, colour):
+    obj = object()
+    obj.origin = Vector3D(x, y, z)
+    obj.position = Vector3D(x, y, z)
+    obj.targetPos = Vector3D(x, y, z)
+    obj.originradius = radius
+    obj.radius = radius
+    obj.velocity = Vector3D(0, 0, 0)
+    obj.colour = colour
+    obj.friction = 0.75
+    obj.spring = 0.05
+
+    def update(obj):
+        obj.velocity.x += (obj.targetPos.x - obj.position.x) * obj.spring
+        obj.velocity.x *= obj.friction
+        obj.position.x += obj.velocity.x
+
+        obj.velocity.y += (obj.targetPos.y - obj.position.y) * obj.spring
+        obj.velocity.y *= obj.friction
+        obj.position.y += obj.velocity.y
+
+        dox = obj.origin.x - obj.position.x
+        doy = obj.origin.y - obj.position.y
+        d = Sqrt(dox * dox + doy * doy)
+
+        obj.targetPos.z = d / 150.0 + 1.0
+        obj.velocity.z += (obj.targetPos.z - obj.position.z) * obj.spring
+        obj.velocity.z *= obj.friction
+        obj.position.z += obj.velocity.z
+
+        obj.radius = obj.originradius * obj.position.z
+        if obj.radius < 1:
+            obj.radius = 1
+
+    obj.update = update
+
+
+    def render(obj):
+        ctx.fillStyle = obj.colour
+        ctx.beginPath()
+        ctx.arc(obj.position.x, obj.position.y, obj.radius, 0, TWOPI, True)
+        ctx.fill()
+
+    obj.render = render
+    return obj
+
+
+
+
+# get the canvas DOM element
+canvas = doc["canvas"]
+ctx = canvas.getContext("2d")
+width = canvas.width
+height = canvas.height
+
+# data structures - generate initial blobs
+blobList = BlobList()
+blobList.blobs = [
+  Blob(150, 160, 0, 90, "rgba(220,5,134,.9)"),
+  Blob(67,  136, 0, 34, "rgba(145,200,46,.9)"),
+  Blob(106, 74,  0, 22, "rgba(45,172,173,.9)"),
+  Blob(114, 52,  0, 10, "rgba(238,172,78,.75)"),
+  Blob(220, 82,  0, 56, "rgba(47,118,178,.9)"),
+  Blob(250, 138, 0, 43, "rgba(248,172,78,.9)"),
+  Blob(232, 232, 0, 25, "rgba(99,198,78,.9)"),
+  Blob(256, 222, 0, 10, "rgba(140,45,136,.9)"),
+  Blob(128, 244, 0, 36, "rgba(226,74,63,.9)"),
+  Blob(64,  188, 0, 10, "rgba(255,203,78,.9)")
+]
+
+def drawText(x, y, text, colour):
+ ctx.fillStyle = colour
+ ctx.fillText(text, x, y)
+
+def drawDisc(x, y, rad, colour):
+  ctx.fillStyle = colour
+  ctx.beginPath()
+  ctx.arc(x, y, rad, 0, TWOPI, true)
+  ctx.fill()
+
+# event handlers
+def mouseMove(e):
+  blobList.mousex = e.clientX
+  blobList.mousey = e.clientY
+canvas.addEventListener("mousemove", mouseMove, False)
+
+# requestAnimFrame shim
+def animframe():
+   for frame in ['requestAnimationFrame',
+                 'webkitRequestAnimationFrame',
+                 'mozRequestAnimationFrame'
+                 'oRequestAnimationFrame',
+                 'msRequestAnimationFrame']:
+      log(frame)
+      try:
+        return getattr(win,frame)
+      except:
+         pass
+   def timeoutFrame(callback, element):
+       timeout = win.setTimeout
+       timeout(callback, 1000 / 60.0)
+   return timeoutFrame
+
+requestAnimFrame = animframe()
+
+
+# init main animation loop
+def loop():
+  # compute canvas offset within parent window including page view position
+  el = canvas
+  global offsetx, offsety
+  offsetx = 0
+  offsety = 0
+  while True:
+     offsetx += el.offsetLeft
+     offsety += el.offsetTop
+     el = el.offsetParent
+     try:
+        el.offsetParent
+     except:
+        break
+
+  offsetx = offsetx - win.pageXOffset
+  offsety = offsety - win.pageYOffset
+
+  ctx.save()
+
+  # clear the left side of the card
+  # the right hand side is already rendered with fixed text
+  ctx.clearRect(0, 0, width, height)
+
+  # perform initial one time rendering of text etc.
+  ctx.save()
+  ctx.font = "Bold 12pt Arial"
+  ctx.restore()
+
+  # render each edge blob - which react to mouse movement
+  ctx.globalCompositeOperation = 'darker'
+  blobList.update()
+  blobList.render()
+
+  # render "eg" text overlay
+  ctx.globalCompositeOperation = 'source-over'
+  ctx.font = "Bold 100pt Arial"
+  ctx.fillStyle = "black"
+  ctx.fillText("SyPy", 96, 224)
+  ctx.restore()
+  requestAnimFrame(loop)
+
+requestAnimFrame(loop)
+
+</script>
 
 </head>
-<body>
+<body onLoad="brython()">
 
+<canvas id="canvas" width="560" height="320"></canvas>
     <h1>SyPy</h1>
     <p>Sydney Python User Group</p>
 
