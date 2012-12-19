@@ -1,36 +1,437 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sydney Python</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <meta charset="UTF-8">
-    <title>SyPy &mdash; Sydney Python User Group</title>
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <style>
 
-</head>
-<body>
+    /* GLOBAL STYLES
+    -------------------------------------------------- */
+    /* Padding below the footer and lighter body text */
 
-    <h1>SyPy</h1>
-    <p>Sydney Python User Group</p>
-
-    <div>
-        <h2>Sign your self up! Upcoming events</h2>
-
-        <h3>SyPy</h3>
-        <p>First thursday of each month</p>
-        Sign up on the <a href="http://sypy.eventbrite.com/">SyPy Eventbrite page</a>
-        
-        <h3>SyPy Hacknight</h3>
-        Sign up on the <a href="http://sypy.eventbrite.com/">SyPy Eventbrite page</a>
-
-    </div>
-
-    <div>
-        <h2>#sypy</h2>
-        <a class="twitter-timeline"  href="https://twitter.com/search?q=%23sypy" data-widget-id="280978224622735360">Tweets about "#sypy"</a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-    </div>
+    body {
+      padding-bottom: 40px;
+      color: #5a5a5a;
+    }
 
 
+
+    /* CUSTOMIZE THE NAVBAR
+    -------------------------------------------------- */
+
+    /* Special class on .container surrounding .navbar, used for positioning it into place. */
+    .navbar-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      margin-top: 20px;
+      margin-bottom: -90px; /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
+    }
+    .navbar-wrapper .navbar {
+
+    }
+
+    /* Remove border and change up box shadow for more contrast */
+    .navbar .navbar-inner {
+      border: 0;
+      -webkit-box-shadow: 0 2px 10px rgba(0,0,0,.25);
+         -moz-box-shadow: 0 2px 10px rgba(0,0,0,.25);
+              box-shadow: 0 2px 10px rgba(0,0,0,.25);
+    }
+
+    /* Downsize the brand/project name a bit */
+    .navbar .brand {
+      padding: 14px 20px 16px; /* Increase vertical padding to match navbar links */
+      font-size: 16px;
+      font-weight: bold;
+      text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+    }
+
+    /* Navbar links: increase padding for taller navbar */
+    .navbar .nav > li > a {
+      padding: 15px 20px;
+    }
+
+    /* Offset the responsive button for proper vertical alignment */
+    .navbar .btn-navbar {
+      margin-top: 10px;
+    }
+
+
+
+    /* CUSTOMIZE THE NAVBAR
+    -------------------------------------------------- */
+
+    /* Carousel base class */
+    .carousel {
+      margin-bottom: 60px;
+    }
+
+    .carousel .container {
+      position: relative;
+      z-index: 9;
+    }
+
+    .carousel-control {
+      height: 80px;
+      margin-top: 0;
+      font-size: 120px;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+      background-color: transparent;
+      border: 0;
+    }
+
+    .carousel .item {
+      height: 500px;
+    }
+    .carousel img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      height: 500px;
+    }
+
+    .carousel-caption {
+      background-color: transparent;
+      position: static;
+      max-width: 550px;
+      padding: 0 20px;
+      margin-top: 200px;
+    }
+    .carousel-caption h1,
+    .carousel-caption .lead {
+      margin: 0;
+      line-height: 1.25;
+      color: #fff;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+    }
+    .carousel-caption .btn {
+      margin-top: 10px;
+    }
+
+
+
+    /* MARKETING CONTENT
+    -------------------------------------------------- */
+
+    /* Center align the text within the three columns below the carousel */
+    .marketing .span4 {
+      text-align: center;
+    }
+    .marketing h2 {
+      font-weight: normal;
+    }
+    .marketing .span4 p {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+
+    /* Featurettes
+    ------------------------- */
+
+    .featurette-divider {
+      margin: 80px 0; /* Space out the Bootstrap <hr> more */
+    }
+    .featurette {
+      padding-top: 120px; /* Vertically center images part 1: add padding above and below text. */
+      overflow: hidden; /* Vertically center images part 2: clear their floats. */
+    }
+    .featurette-image {
+      margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
+    }
+
+    /* Give some space on the sides of the floated elements so text doesn't run right into it. */
+    .featurette-image.pull-left {
+      margin-right: 40px;
+    }
+    .featurette-image.pull-right {
+      margin-left: 40px;
+    }
+
+    /* Thin out the marketing headings */
+    .featurette-heading {
+      font-size: 50px;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+
+
+    /* RESPONSIVE CSS
+    -------------------------------------------------- */
+
+    @media (max-width: 979px) {
+
+      .container.navbar-wrapper {
+        margin-bottom: 0;
+        width: auto;
+      }
+      .navbar-inner {
+        border-radius: 0;
+        margin: -20px 0;
+      }
+
+      .carousel .item {
+        height: 500px;
+      }
+      .carousel img {
+        width: auto;
+        height: 500px;
+      }
+
+      .featurette {
+        height: auto;
+        padding: 0;
+      }
+      .featurette-image.pull-left,
+      .featurette-image.pull-right {
+        display: block;
+        float: none;
+        max-width: 40%;
+        margin: 0 auto 20px;
+      }
+    }
+
+
+    @media (max-width: 767px) {
+
+      .navbar-inner {
+        margin: -20px;
+      }
+
+      .carousel {
+        margin-left: -20px;
+        margin-right: -20px;
+      }
+      .carousel .container {
+
+      }
+      .carousel .item {
+        height: 300px;
+      }
+      .carousel img {
+        height: 300px;
+      }
+      .carousel-caption {
+        width: 65%;
+        padding: 0 70px;
+        margin-top: 100px;
+      }
+      .carousel-caption h1 {
+        font-size: 30px;
+      }
+      .carousel-caption .lead,
+      .carousel-caption .btn {
+        font-size: 18px;
+      }
+
+      .marketing .span4 + .span4 {
+        margin-top: 40px;
+      }
+
+      .featurette-heading {
+        font-size: 30px;
+      }
+      .featurette .lead {
+        font-size: 18px;
+        line-height: 1.5;
+      }
+
+    }
+    </style>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="ico/favicon.png">
+  </head>
+
+  <body>
+
+
+
+    <!-- NAVBAR
+    ================================================== -->
+    <div class="navbar-wrapper">
+      <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
+      <div class="container">
+
+        <div class="navbar">
+          <div class="navbar-inner">
+            <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="#">Sydney Python</a>
+            <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
+            <div class="nav-collapse collapse">
+
+            </div><!--/.nav-collapse -->
+          </div><!-- /.navbar-inner -->
+        </div><!-- /.navbar -->
+
+      </div> <!-- /.container -->
+    </div><!-- /.navbar-wrapper -->
+
+
+
+    <!-- Carousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="img/examples/slide-01.jpg" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>G'day, Bruce!</h1>
+              <h2 class="lead">Come along to our fabulous events!</h2>
+              <a class="btn btn-large btn-primary" href="#">Sign up today</a>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+    </div><!-- /.carousel -->
+
+
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing">
+
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+        <div class="span4">
+          <img class="img-rounded" src="img/logo.png">
+          <h1>SyPy</h1>
+          <h4>First thursday of each month. Sign up on the <a href="http://sypy.eventbrite.com/">SyPy Eventbrite</a> page</h4>
+          <p><a class="btn btn-large" href="http://sypy.eventbrite.com/">View details &raquo;</a></p>
+        </div><!-- /.span4 -->
+        <div class="span4">
+          <img class="img-rounded" src="img/hack-night.png">
+          <h1>SyPy Hacknight</h1>
+          <h4>First thursday of each month. Sign up on the <a href="http://sypy.eventbrite.com/">SyPy Eventbrite</a> page</h4>
+          <p><a class="btn btn-large" href="http://sypy.eventbrite.com/">View details &raquo;</a></p>
+        </div><!-- /.span4 -->
+        <div class="span4">
+          <img class="img-rounded" src="img/google.png">
+          <h1>Google Group</h1>
+          <h4>Yes, we have one. See updates about events and join the <a href="http://groups.google.com/forum/?fromgroups#!forum/sydneypython">discussions</a>.</h4>
+          <p><a class="btn btn-large" href="http://groups.google.com/forum/?fromgroups#!forum/sydneypython">View details &raquo;</a></p>
+        </div><!-- /.span4 -->
+      </div><!-- /.row -->
+
+
+      <!-- START THE FEATURETTES -->
+
+      <hr class="featurette-divider">
+
+      <div class="featurette">
+        <div class="pull-right">
+          <iframe width="320" height="350" src="http://meetu.ps/rNjyg" frameborder="0"></iframe>
+        </div>
+        <h2 class="featurette-heading">In fact, <span class="muted">we bring the updates to you.</span></h2>
+        <p class="lead">Here, remember to insert the widget on the right, or write some JSON handling script.</p>
+      </div>
+
+      <hr class="featurette-divider">
+
+
+      <div class="featurette">
+
+        <div style="float: left; margin-top: -60px; margin-right:60px;">
+
+        <div style="border-style: none;border-width: 0;border-color: #FFFFFF;width: 480px;height: 330px;overflow: hidden;"><div id="newsblock85106436" style="word-wrap: break-word; padding: 5px; background-color: #FFFFFF;">
+        <!-- DO NOT ALTER, REMOVE, OR IN ANY WAY TRY TO HIDE THE FOLLOWING TAG OR ITS CONTENTS OR BLASTCASTA WILL NOT FUNCTION PROPERLY. --><div align="center" style="font-size: 8pt;"><br /><a href="http://www.blastcasta.com/" style="text-decoration: none; color: #227DFF;" target="_top"><b>Get Your Twitter Widget</b><br />Powered by BlastCasta</a></div>
+        </div></div>
+
+        <script id="scrnewsblock85106436" type="text/javascript"></script>
+        <script type="text/javascript"> /* <![CDATA[ */ 
+        setTimeout('document.getElementById(\'scrnewsblock85106436\').src = (document.location.protocol == \'https:\' ? \'https\' : \'http\') + \'://www.poweringnews.com/newsjavascript.aspx?feedurl=http%3A//search.twitter.com/search.rss%3Fq%3D%2523python&maxitems=-1&showfeedtitle=0&showtitle=1&showdate=1&showsummary=1&showauthor=0&showactionsbox=0&showrsslink=0&showcopyright=0&opennewwindow=1&inheritstyles=0&bgcolor=%23FFFFFF&titlefontsize=10&summaryfontsize=10&fontfamily=Arial%2CHelvetica&titlecolor=%23227DFF&summarycolor=%23000000&sepstyle=dashed&sepcolor=%23D6D6D6&objectid=newsblock85106436\'', 500);
+         /* ]]> */ </script>
+
+        </div>
+
+
+
+
+        <h2 class="featurette-heading">Oh yeah. <br /><span class="muted">We have Twitter too.</span></h2>
+        <p class="lead">Brought to you by the insertable widget.</p>
+
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="featurette">
+        <img class="featurette-image pull-right" src="img/billboard.jpg">
+        <h2 class="featurette-heading">Hey! <span class="muted">You know what?</span></h2>
+        <p class="lead">We can probably sell some sponsor space around here.</p>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <!-- /END THE FEATURETTES -->
+
+
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">▲ Woosh!</a></p>
+        <p>&copy; 2012 SyPy. &middot; 
+          <a href="http://en.wikipedia.org/wiki/Privacy">Privacy</a> &middot; 
+          <a href="http://en.wikipedia.org/wiki/Terms_of_service">Terms</a></p>
+      </footer>
+
+    </div><!-- /.container -->
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-
-</body>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap-transition.js"></script>
+    <script src="js/bootstrap-alert.js"></script>
+    <script src="js/bootstrap-modal.js"></script>
+    <script src="js/bootstrap-dropdown.js"></script>
+    <script src="js/bootstrap-scrollspy.js"></script>
+    <script src="js/bootstrap-tab.js"></script>
+    <script src="js/bootstrap-tooltip.js"></script>
+    <script src="js/bootstrap-popover.js"></script>
+    <script src="js/bootstrap-button.js"></script>
+    <script src="js/bootstrap-collapse.js"></script>
+    <script src="js/bootstrap-carousel.js"></script>
+    <script src="js/bootstrap-typeahead.js"></script>
+    <script>
+      !function ($) {
+        $(function(){
+          // carousel demo
+          $('#myCarousel').carousel()
+        })
+      }(window.jQuery)
+    </script>
+  </body>
 </html>
