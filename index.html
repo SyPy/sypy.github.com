@@ -8,7 +8,7 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <style>
 
@@ -21,50 +21,6 @@
       color: #5a5a5a;
     }
 
-
-
-    /* CUSTOMIZE THE NAVBAR
-    -------------------------------------------------- */
-
-    /* Special class on .container surrounding .navbar, used for positioning it into place. */
-    .navbar-wrapper {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 10;
-      margin-top: 20px;
-      margin-bottom: -90px; /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
-    }
-    .navbar-wrapper .navbar {
-
-    }
-
-    /* Remove border and change up box shadow for more contrast */
-    .navbar .navbar-inner {
-      border: 0;
-      -webkit-box-shadow: 0 2px 10px rgba(0,0,0,.25);
-         -moz-box-shadow: 0 2px 10px rgba(0,0,0,.25);
-              box-shadow: 0 2px 10px rgba(0,0,0,.25);
-    }
-
-    /* Downsize the brand/project name a bit */
-    .navbar .brand {
-      padding: 14px 20px 16px; /* Increase vertical padding to match navbar links */
-      font-size: 16px;
-      font-weight: bold;
-      text-shadow: 0 -1px 0 rgba(0,0,0,.5);
-    }
-
-    /* Navbar links: increase padding for taller navbar */
-    .navbar .nav > li > a {
-      padding: 15px 20px;
-    }
-
-    /* Offset the responsive button for proper vertical alignment */
-    .navbar .btn-navbar {
-      margin-top: 10px;
-    }
 
 
 
@@ -271,29 +227,7 @@
 
     <!-- NAVBAR
     ================================================== -->
-    <div class="navbar-wrapper">
-      <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
-      <div class="container">
-
-        <div class="navbar">
-          <div class="navbar-inner">
-            <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </a>
-            <a class="brand" href="#">Sydney Python</a>
-            <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
-            <div class="nav-collapse collapse">
-
-            </div><!--/.nav-collapse -->
-          </div><!-- /.navbar-inner -->
-        </div><!-- /.navbar -->
-
-      </div> <!-- /.container -->
-    </div><!-- /.navbar-wrapper -->
-
+    
 
 
     <!-- Carousel
@@ -327,13 +261,13 @@
         <div class="span4">
           <img class="img-rounded" src="img/logo.png">
           <h1>SyPy</h1>
-          <h4>First thursday of each month. Sign up on the <a href="http://sypy.eventbrite.com/">SyPy Eventbrite</a> page</h4>
+          <h4>First Thursday of each month. Sign up on the <a href="http://sypy.eventbrite.com/">SyPy Eventbrite</a> page</h4>
           <p><a class="btn btn-large" href="http://sypy.eventbrite.com/">View details &raquo;</a></p>
         </div><!-- /.span4 -->
         <div class="span4">
           <img class="img-rounded" src="img/hack-night.png">
           <h1>SyPy Hacknight</h1>
-          <h4>First thursday of each month. Sign up on the <a href="http://sypy.eventbrite.com/">SyPy Eventbrite</a> page</h4>
+          <h4>Third Tuesday of each month. Sign up on the <a href="http://sypy.eventbrite.com/">SyPy Eventbrite</a> page</h4>
           <p><a class="btn btn-large" href="http://sypy.eventbrite.com/">View details &raquo;</a></p>
         </div><!-- /.span4 -->
         <div class="span4">
@@ -351,7 +285,7 @@
 
       <div class="featurette">
         <div class="pull-right">
-          <iframe width="320" height="350" src="http://meetu.ps/rNjyg" frameborder="0"></iframe>
+          <iframe width="320" height="200" src="http://meetu.ps/rNjyg" frameborder="0"></iframe>
         </div>
         <h2 class="featurette-heading">In fact, <span class="muted">we bring the updates to you.</span></h2>
         <p class="lead">Here, remember to insert the widget on the right, or write some JSON handling script.</p>
@@ -364,7 +298,7 @@
 
         <div style="float: left; margin-top: -60px; margin-right:60px;">
 
-        <div style="border-style: none;border-width: 0;border-color: #FFFFFF;width: 480px;height: 330px;overflow: hidden;"><div id="newsblock85106436" style="word-wrap: break-word; padding: 5px; background-color: #FFFFFF;">
+        <div style="border-style: none;border-width: 0;border-color: #FFFFFF;width: 480px;height: 300px;overflow: hidden;"><div id="newsblock85106436" style="word-wrap: break-word; padding: 5px; background-color: #FFFFFF;">
         <!-- DO NOT ALTER, REMOVE, OR IN ANY WAY TRY TO HIDE THE FOLLOWING TAG OR ITS CONTENTS OR BLASTCASTA WILL NOT FUNCTION PROPERLY. --><div align="center" style="font-size: 8pt;"><br /><a href="http://www.blastcasta.com/" style="text-decoration: none; color: #227DFF;" target="_top"><b>Get Your Twitter Widget</b><br />Powered by BlastCasta</a></div>
         </div></div>
 
@@ -377,7 +311,6 @@
 
 
 
-
         <h2 class="featurette-heading">Oh yeah. <br /><span class="muted">We have Twitter too.</span></h2>
         <p class="lead">Brought to you by the insertable widget.</p>
 
@@ -385,7 +318,9 @@
 
       <hr class="featurette-divider">
 
+
       <div class="featurette">
+        
         <img class="featurette-image pull-right" src="img/billboard.jpg">
         <h2 class="featurette-heading">Hey! <span class="muted">You know what?</span></h2>
         <p class="lead">We can probably sell some sponsor space around here.</p>
@@ -408,30 +343,6 @@
 
 
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap-transition.js"></script>
-    <script src="js/bootstrap-alert.js"></script>
-    <script src="js/bootstrap-modal.js"></script>
-    <script src="js/bootstrap-dropdown.js"></script>
-    <script src="js/bootstrap-scrollspy.js"></script>
-    <script src="js/bootstrap-tab.js"></script>
-    <script src="js/bootstrap-tooltip.js"></script>
-    <script src="js/bootstrap-popover.js"></script>
-    <script src="js/bootstrap-button.js"></script>
-    <script src="js/bootstrap-collapse.js"></script>
-    <script src="js/bootstrap-carousel.js"></script>
-    <script src="js/bootstrap-typeahead.js"></script>
-    <script>
-      !function ($) {
-        $(function(){
-          // carousel demo
-          $('#myCarousel').carousel()
-        })
-      }(window.jQuery)
-    </script>
+
   </body>
 </html>
