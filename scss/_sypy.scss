@@ -1,0 +1,48 @@
+$HEADER_HEIGHT: 16em;
+
+body {
+	font-size: 100%;
+	line-height: 1.5;
+}
+
+.primary-container {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+header {
+	position: relative;
+	background: black;
+	height: $HEADER_HEIGHT;
+	overflow: hidden;
+	h1 {
+		padding-top: 0.8em;
+		color: #F5DE50;
+		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+		font-family: "futura-pt", "Helvetica Neue", Helvetica, arial, sans-serif;
+		position: absolute;
+		margin: 0;
+		width: 100%;
+		z-index: 2;
+		span {
+			display: block;
+			margin: 0 auto;
+			text-align: center;
+			font-weight: 400;
+		}
+		.title {
+			font-size: 3em;
+		}
+		.subtitle {
+			font-weight: 200;
+			font-size: 0.9em;
+			margin-top: -0.3em;
+		}
+	}
+	img {
+		min-height: $HEADER_HEIGHT;
+		opacity: 0.7;
+		position: absolute;
+		z-index: 1;
+	}
+}
