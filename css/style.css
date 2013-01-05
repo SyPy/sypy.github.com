@@ -354,10 +354,10 @@ header {
       header h1 {
         font-size: 12em;
         line-height: 1.1; } }
-    @media (min-width: 900px) {
+    @media (min-width: 1040px) {
       header h1 {
-        font-size: 16em;
-        line-height: 0.9; } }
+        font-size: 19em;
+        line-height: 0.6; } }
   header img {
     min-height: 16em;
     max-width: 100%;
@@ -410,7 +410,7 @@ section {
       text-decoration: none;
       border-bottom: 1px dashed #333; }
 
-@media (min-width: 900px) {
+@media (min-width: 1040px) {
   header {
     height: 24em; }
     header h1 {
@@ -421,12 +421,10 @@ section {
   .sydney-python {
     width: 20em;
     position: absolute;
-    top: 5em;
-    left: 58%;
+    top: 3em;
+    left: 60%;
     z-index: 2;
     border: 0; }
-    .sydney-python h1 {
-      font-size: 2em; }
 
   .hacknight,
   .mailing-list {
@@ -442,11 +440,5 @@ section {
   .mailing-list {
     margin-left: -2px;
     z-index: 1; } }
-@media (min-width: 972px) {
-  .sydney-python {
-    left: 59%; } }
-@media (min-width: 1056px) {
-  .sydney-python {
-    left: 60%; } }
 .clear {
   clear: both; }

@@ -48,9 +48,9 @@ header {
 			font-size: 12em;
 			line-height: 1.1;
 		}
-		@media (min-width: 900px) {
-			font-size: 16em;
-			line-height: 0.9;
+		@media (min-width: 1040px) {
+			font-size: 19em;
+			line-height: 0.6;
 		}
 	}
 	img {
@@ -114,7 +114,7 @@ section {
 }
 
 // Switch to 1-2 column layout
-@media (min-width: 900px) {
+@media (min-width: 1040px) {
 	header {
 		height: $HEADER_HEIGHT * 1.5;
 		h1 {
@@ -126,12 +126,19 @@ section {
 	.sydney-python {
 		width: 20em;
 		position: absolute;
-		top: 5em;
-		left: 58%;
+		top: 3em;
+		left: 60%;
 		z-index: 2;
 		border: 0;
 		h1 {
-			font-size: 2em;
+			//font-size: 2em;
+			//margin-bottom: 0.7em;
+		}
+		p {
+			//margin-bottom: 0.7em;
+		}
+		p:last-child {
+			//margin-bottom: 0.4em;
 		}
 	}
 	.hacknight,
@@ -149,18 +156,6 @@ section {
 		// Offset against .hacknight's border
 		margin-left: -2px;
 		z-index: 1;
-	}
-}
-
-// Maintain equal spacing around the 'Sydney Python' box
-@media (min-width: 972px) {
-	.sydney-python {
-		left: 59%;
-	}
-}
-@media (min-width: 1056px) {
-	.sydney-python {
-		left: 60%;
 	}
 }
 
