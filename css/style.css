@@ -317,8 +317,8 @@ body {
   font-weight: 400;
   line-height: 1.5;
   font-family: Helvetica, arial, sans-serif;
-  color: #333;
-  background: #DEDDDD; }
+  color: #333333;
+  background: #dedddd; }
 
 .primary-container {
   max-width: 1200px;
@@ -335,7 +335,7 @@ header {
     font-family: "futura-pt", Helvetica, arial, sans-serif;
     font-weight: 500;
     font-size: 7em;
-    color: #F5DE50;
+    color: #f5de50;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
     text-align: center;
     line-height: 2;
@@ -449,3 +449,41 @@ section {
     left: 61%; } }
 .clear {
   clear: both; }
+
+.ie7 header,
+.ie8 header {
+  height: 24em; }
+  .ie7 header h1,
+  .ie8 header h1 {
+    width: 50%;
+    top: 0.2em;
+    left: 5%;
+    font-size: 19em;
+    line-height: 0.6; }
+  .ie7 header img,
+  .ie8 header img {
+    top: -11em; }
+.ie7 .sydney-python,
+.ie8 .sydney-python {
+  width: 20em;
+  position: absolute;
+  top: 3em;
+  left: 61%;
+  z-index: 2;
+  border: 0; }
+.ie7 .hacknight,
+.ie7 .mailing-list,
+.ie8 .hacknight,
+.ie8 .mailing-list {
+  width: 50%;
+  border-bottom: 0;
+  padding: 0 0 1em 0;
+  float: left; }
+.ie7 .hacknight,
+.ie8 .hacknight {
+  border-right: 2px solid black;
+  z-index: 2; }
+.ie7 .mailing-list,
+.ie8 .mailing-list {
+  margin-left: -2px;
+  z-index: 1; }
