@@ -435,7 +435,7 @@ section {
     float: left; }
 
   .hacknight {
-    border-right: 2px solid black;
+    border-right: 1px solid black;
     z-index: 2; }
 
   .mailing-list {
@@ -481,7 +481,7 @@ section {
   float: left; }
 .ie7 .hacknight,
 .ie8 .hacknight {
-  border-right: 2px solid black;
+  border-right: 1px solid black;
   z-index: 2; }
 .ie7 .mailing-list,
 .ie8 .mailing-list {
