@@ -354,10 +354,10 @@ header {
       header h1 {
         font-size: 12em;
         line-height: 1.1; } }
-    @media (min-width: 952px) {
+    @media (min-width: 900px) {
       header h1 {
-        font-size: 14em;
-        line-height: 1; } }
+        font-size: 16em;
+        line-height: 0.9; } }
   header img {
     min-height: 16em;
     max-width: 100%;
@@ -409,21 +409,20 @@ section {
       text-decoration: none;
       border-bottom: 1px dashed #333; }
 
-@media (min-width: 750px) {
+@media (min-width: 900px) {
   header {
     height: 24em; }
     header h1 {
       width: 50%;
       top: 0.2em;
-      left: 0; }
+      left: 2%; }
 
   .sydney-python {
     width: 20em;
     position: absolute;
-    background-color: white;
     top: 5em;
-    left: 53%;
-    z-index: 5;
+    left: 58%;
+    z-index: 2;
     border: 0; }
     .sydney-python h1 {
       font-size: 2em; }
@@ -443,6 +442,9 @@ section {
     margin-left: -2px;
     z-index: 1; } }
 @media (min-width: 972px) {
+  .sydney-python {
+    left: 59%; } }
+@media (min-width: 1056px) {
   .sydney-python {
     left: 60%; } }
 .clear {

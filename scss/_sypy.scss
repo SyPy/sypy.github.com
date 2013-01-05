@@ -48,9 +48,9 @@ header {
 			font-size: 12em;
 			line-height: 1.1;
 		}
-		@media (min-width: 952px) {
-			font-size: 14em;
-			line-height: 1;
+		@media (min-width: 900px) {
+			font-size: 16em;
+			line-height: 0.9;
 		}
 	}
 	img {
@@ -112,22 +112,22 @@ section {
 	}
 }
 
-@media (min-width: 750px) {
+// Switch to 1-2 column layout
+@media (min-width: 900px) {
 	header {
 		height: $HEADER_HEIGHT * 1.5;
 		h1 {
 			width: 50%;
 			top: 0.2em;
-			left: 0;
+			left: 2%;
 		}
 	}
 	.sydney-python {
 		width: 20em;
 		position: absolute;
-		background-color: rgba(255,255,255, 1);
 		top: 5em;
-		left: 53%;
-		z-index: 5;
+		left: 58%;
+		z-index: 2;
 		border: 0;
 		h1 {
 			font-size: 2em;
@@ -145,16 +145,19 @@ section {
 		z-index: 2;
 	}
 	.mailing-list {
-		// Offset against the border
+		// Offset against .hacknight's border
 		margin-left: -2px;
 		z-index: 1;
 	}
 }
 
+// Maintain equal spacing around the 'Sydney Python' box
 @media (min-width: 972px) {
-	header h1 {
-		//left: 5%;
+	.sydney-python {
+		left: 59%;
 	}
+}
+@media (min-width: 1056px) {
 	.sydney-python {
 		left: 60%;
 	}
