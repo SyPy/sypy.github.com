@@ -323,7 +323,8 @@ body {
 .primary-container {
   max-width: 1200px;
   margin: 0 auto;
-  background: white; }
+  background: white;
+  position: relative; }
 
 header {
   position: relative;
@@ -354,7 +355,7 @@ header {
       header h1 {
         font-size: 12em;
         line-height: 1.1; } }
-    @media (min-width: 1040px) {
+    @media (min-width: 1050px) {
       header h1 {
         font-size: 19em;
         line-height: 0.6; } }
@@ -410,7 +411,7 @@ section {
       text-decoration: none;
       border-bottom: 1px dashed #333; }
 
-@media (min-width: 1040px) {
+@media (min-width: 1050px) {
   header {
     height: 24em; }
     header h1 {
@@ -422,7 +423,7 @@ section {
     width: 20em;
     position: absolute;
     top: 3em;
-    left: 60%;
+    left: 62%;
     z-index: 2;
     border: 0; }
 
@@ -440,5 +441,11 @@ section {
   .mailing-list {
     margin-left: -2px;
     z-index: 1; } }
+@media (min-width: 1200px) {
+  header h1 {
+    left: 5%; }
+
+  .sydney-python {
+    left: 61%; } }
 .clear {
   clear: both; }

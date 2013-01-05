@@ -17,6 +17,7 @@ body {
 	max-width: 1200px;
 	margin: 0 auto;
 	background: white;
+	position: relative;
 }
 
 header {
@@ -48,7 +49,7 @@ header {
 			font-size: 12em;
 			line-height: 1.1;
 		}
-		@media (min-width: 1040px) {
+		@media (min-width: 1050px) {
 			font-size: 19em;
 			line-height: 0.6;
 		}
@@ -114,7 +115,7 @@ section {
 }
 
 // Switch to 1-2 column layout
-@media (min-width: 1040px) {
+@media (min-width: 1050px) {
 	header {
 		height: $HEADER_HEIGHT * 1.5;
 		h1 {
@@ -127,19 +128,9 @@ section {
 		width: 20em;
 		position: absolute;
 		top: 3em;
-		left: 60%;
+		left: 62%;
 		z-index: 2;
 		border: 0;
-		h1 {
-			//font-size: 2em;
-			//margin-bottom: 0.7em;
-		}
-		p {
-			//margin-bottom: 0.7em;
-		}
-		p:last-child {
-			//margin-bottom: 0.4em;
-		}
 	}
 	.hacknight,
 	.mailing-list {
@@ -156,6 +147,15 @@ section {
 		// Offset against .hacknight's border
 		margin-left: -2px;
 		z-index: 1;
+	}
+}
+// Browser is wider than .primary-container
+@media (min-width: 1200px) {
+	header h1 {
+		left: 5%;
+	}
+	.sydney-python {
+		left: 61%;
 	}
 }
 
