@@ -26,7 +26,7 @@ header {
 	overflow: hidden;
 	h1 {
 		@include futura;
-		font-weight: 400;
+		font-weight: 500;
 		font-size: 7em;
 		color: #F5DE50;
 		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
@@ -88,7 +88,7 @@ section {
 	h1 {
 		@include futura;
 		font-size: 3em;
-		font-weight: 200;
+		font-weight: 300;
 		text-align: center;
 		line-height: 1;
 		margin: 0.5em 0;
@@ -101,11 +101,12 @@ section {
 		text-align: center;
 		font-size: 1.1em;
 		strong {
-			font-weight: 500;
+			font-weight: 400;
 			font-size: 1.1em;
 		}
 		a {
 			color: #333;
+			font-weight: 300;
 			text-decoration: none;
 			border-bottom: 1px dashed #333;
 		}
