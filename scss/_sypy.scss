@@ -1,13 +1,22 @@
 $HEADER_HEIGHT: 16em;
 
+@mixin futura {
+	font-family: "futura-pt", Helvetica, arial, sans-serif;
+}
+
 body {
 	font-size: 100%;
+	font-weight: 400;
 	line-height: 1.5;
+	font-family: Helvetica, arial, sans-serif;
+	color: #333;
+	background: lightgrey;
 }
 
 .primary-container {
 	max-width: 1200px;
 	margin: 0 auto;
+	background: white;
 }
 
 header {
@@ -16,33 +25,141 @@ header {
 	height: $HEADER_HEIGHT;
 	overflow: hidden;
 	h1 {
-		padding-top: 0.8em;
+		@include futura;
+		font-weight: 400;
+		font-size: 7em;
 		color: #F5DE50;
 		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
-		font-family: "futura-pt", "Helvetica Neue", Helvetica, arial, sans-serif;
+		text-align: center;
+		line-height: 2;
 		position: absolute;
-		margin: 0;
 		width: 100%;
+		margin: 0;
 		z-index: 2;
-		span {
-			display: block;
-			margin: 0 auto;
-			text-align: center;
-			font-weight: 400;
+		@media (min-width: 300px) {
+			font-size: 9em;
+			line-height: 1.5;
 		}
-		.title {
-			font-size: 3em;
+		@media (min-width: 392px) {
+			font-size: 10em;
+			line-height: 1.4;
 		}
-		.subtitle {
-			font-weight: 200;
-			font-size: 0.9em;
-			margin-top: -0.3em;
+		@media (min-width: 600px) {
+			font-size: 12em;
+			line-height: 1.1;
+		}
+		@media (min-width: 952px) {
+			font-size: 14em;
+			line-height: 1;
 		}
 	}
 	img {
 		min-height: $HEADER_HEIGHT;
+		max-width: 100%;
 		opacity: 0.7;
 		position: absolute;
 		z-index: 1;
+		@media (min-width: 430px) {
+			top: -1em;
+		}
+		@media (min-width: 470px) {
+			top: -3em;
+		}
+		@media (min-width: 573px) {
+			top: -6em;
+		}
+		@media (min-width: 660px) {
+			top: -8em;
+		}
+		@media (min-width: 1057px) {
+			top: -11em;
+		}
 	}
+}
+
+section {
+	border-bottom: 2px solid black;
+	padding: 0 0.5em 1em 0.5em;
+	background: white;
+	position: relative;
+	&:last-child {
+		border-bottom: 0;
+	}
+	h1 {
+		@include futura;
+		font-size: 3em;
+		font-weight: 200;
+		text-align: center;
+		line-height: 1;
+		margin: 0.5em 0;
+		color: black;
+	}
+	p {
+		@include futura;
+		margin: 0.25em 0 1em 0;
+		padding: 0 1em;
+		text-align: center;
+		font-size: 1.1em;
+		strong {
+			font-weight: 500;
+			font-size: 1.1em;
+		}
+		a {
+			color: #333;
+			text-decoration: none;
+			border-bottom: 1px dashed #333;
+		}
+	}
+}
+
+@media (min-width: 750px) {
+	header {
+		height: $HEADER_HEIGHT * 1.5;
+		h1 {
+			width: 50%;
+			top: 0.2em;
+			left: 0;
+		}
+	}
+	.sydney-python {
+		width: 20em;
+		position: absolute;
+		background-color: rgba(255,255,255, 1);
+		top: 5em;
+		left: 53%;
+		z-index: 5;
+		border: 0;
+		h1 {
+			font-size: 2em;
+		}
+	}
+	.hacknight,
+	.mailing-list {
+		width: 50%;
+		border-bottom: 0;
+		padding: 0 0 1em 0;
+		float: left;
+	}
+	.hacknight {
+		border-right: 2px solid black;
+		z-index: 2;
+	}
+	.mailing-list {
+		// Offset against the border
+		margin-left: -2px;
+		z-index: 1;
+	}
+}
+
+@media (min-width: 972px) {
+	header h1 {
+		//left: 5%;
+	}
+	.sydney-python {
+		left: 60%;
+	}
+}
+
+.clear {
+	clear: both;
 }
