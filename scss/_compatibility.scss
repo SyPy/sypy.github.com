@@ -1,0 +1,42 @@
+@import 'constants';
+
+.ie7,
+.ie8 {
+	header {
+		height: $HEADER_HEIGHT * 1.5;
+		h1 {
+			width: 50%;
+			top: 0.2em;
+			left: 5%;
+			font-size: 19em;
+			line-height: 0.6;
+		}
+		img {
+			top: -11em;
+		}
+	}
+	.sydney-python {
+		width: 20em;
+		position: absolute;
+		top: 3em;
+		left: 61%;
+		z-index: 2;
+		border: 0;
+	}
+	.hacknight,
+	.mailing-list {
+		width: 50%;
+		border-bottom: 0;
+		padding: 0 0 1em 0;
+		float: left;
+	}
+	.hacknight {
+		border-right: 1px solid black;
+		z-index: 2;
+	}
+	.mailing-list {
+		// Offset against .hacknight's border
+		margin-left: -2px;
+		z-index: 1;
+	}
+}

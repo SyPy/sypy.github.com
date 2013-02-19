@@ -1,0 +1,164 @@
+@import 'constants';
+
+@mixin futura {
+	font-family: "futura-pt", Helvetica, arial, sans-serif;
+}
+
+body {
+	font-size: 100%;
+	font-weight: 400;
+	line-height: 1.5;
+	font-family: Helvetica, arial, sans-serif;
+	color: $BODY_COLOUR;
+	background: $BODY_BACKGROUND;
+}
+
+.primary-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	background: white;
+	position: relative;
+}
+
+header {
+	position: relative;
+	background: black;
+	height: $HEADER_HEIGHT;
+	overflow: hidden;
+	h1 {
+		@include futura;
+		font-weight: 500;
+		font-size: 7em;
+		color: $YELLOW;
+		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+		text-align: center;
+		line-height: 2;
+		position: absolute;
+		width: 100%;
+		margin: 0;
+		z-index: 2;
+		@media (min-width: 300px) {
+			font-size: 9em;
+			line-height: 1.5;
+		}
+		@media (min-width: 392px) {
+			font-size: 10em;
+			line-height: 1.4;
+		}
+		@media (min-width: 600px) {
+			font-size: 12em;
+			line-height: 1.1;
+		}
+		@media (min-width: 1050px) {
+			font-size: 19em;
+			line-height: 0.6;
+		}
+	}
+	img {
+		min-height: $HEADER_HEIGHT;
+		max-width: 100%;
+		opacity: 0.7;
+		position: absolute;
+		z-index: 1;
+		@media (min-width: 430px) {
+			top: -1em;
+		}
+		@media (min-width: 470px) {
+			top: -3em;
+		}
+		@media (min-width: 573px) {
+			top: -6em;
+		}
+		@media (min-width: 660px) {
+			top: -8em;
+		}
+		@media (min-width: 1057px) {
+			top: -11em;
+		}
+	}
+}
+
+section {
+	border-bottom: 2px solid black;
+	padding: 0 0.5em 1em 0.5em;
+	background: white;
+	position: relative;
+	&:last-child {
+		border-bottom: 0;
+	}
+	h1 {
+		@include futura;
+		font-size: 3em;
+		font-weight: 300;
+		text-align: center;
+		line-height: 1;
+		margin: 0.5em 0;
+		color: black;
+	}
+	p {
+		@include futura;
+		margin: 0.25em 0 1em 0;
+		padding: 0 1em;
+		text-align: center;
+		font-size: 1.1em;
+		strong {
+			font-weight: 400;
+			font-size: 1.1em;
+		}
+		a {
+			color: #333;
+			font-weight: 300;
+			text-decoration: none;
+			border-bottom: 1px dashed #333;
+		}
+	}
+}
+
+// Switch to 1-2 column layout
+@media (min-width: 1050px) {
+	header {
+		height: $HEADER_HEIGHT * 1.5;
+		h1 {
+			width: 50%;
+			top: 0.2em;
+			left: 2%;
+		}
+	}
+	.sydney-python {
+		width: 20em;
+		position: absolute;
+		top: 3em;
+		left: 62%;
+		z-index: 2;
+		border: 0;
+	}
+	.hacknight,
+	.mailing-list {
+		width: 50%;
+		border-bottom: 0;
+		padding: 0 0 1em 0;
+		float: left;
+	}
+	.hacknight {
+		border-right: 1px solid black;
+		z-index: 2;
+	}
+	.mailing-list {
+		// Offset against .hacknight's border
+		margin-left: -2px;
+		z-index: 1;
+	}
+}
+// Browser is wider than .primary-container
+@media (min-width: 1200px) {
+	header h1 {
+		left: 5%;
+	}
+	.sydney-python {
+		left: 61%;
+	}
+}
+
+.clear {
+	clear: both;
+}

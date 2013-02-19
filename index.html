@@ -1,395 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Sydney Python</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-
-    <script src="http://www.kevs3d.co.uk/dev/canvask3d/scripts/mathlib-min.js"></script>
-    <script src="http://www.brython.info/brython.js"></script>
-<script type="text/python">
-
-# converted from original js on http://www.kevs3d.co.uk/dev/eglogo/
-
-offsetx = 0
-offsety = 0
-
-# data structures
-
-def Vector3D(x=0,y=0,z=0):
-    obj = object()
-    obj.x = x
-    obj.y = y
-    obj.z = z
-    return obj
-
-def BlobList():
-    obj = object()
-    obj.mousex = 0
-    obj.mousey = 0
-    obj.blobs = []
-
-    def update(obj):
-        # special case for first blob - which is the main magenta disc
-        blob = obj.blobs[0]
-        if (Rnd() > 0.99):
-            blob.velocity.z += (Rnd() * 0.10 - 0.05)
-            blob.spring = 0.0125
-        blob.update()
-
-        # all the other blobs can animate based on mouse interaction
-        for i in range(1, obj.blobs.length):
-            blob = obj.blobs[i]
-
-            # calculate offset from mouse position - apply canvas element offset
-            dx = obj.mousex - (blob.position.x + offsetx)
-            dy = obj.mousey - (blob.position.y + offsety)
-            d = Sqrt(dx * dx + dy * dy)
-
-            # if the mouse is within the radius of a blog - then nudge it out
-            rad = (blob.originradius > 16) and blob.originradius or 16
-            if (d < rad):
-                blob.targetPos.x = blob.position.x - dx
-                blob.targetPos.y = blob.position.y - dy
-                blob.spring = 0.033
-            # else based on a random chance, pulse the blob
-            elif (Rnd() > 0.995):
-                blob.targetPos.x = blob.origin.x
-                blob.targetPos.y = blob.origin.y
-                blob.velocity.z += (Rnd() * 0.30 - 0.15)
-                blob.spring = 0.0125
-            # else just animate towards the original position
-            else:
-                blob.targetPos.x = blob.origin.x
-                blob.targetPos.y = blob.origin.y
-                blob.spring = 0.05
-
-            blob.update()
-
-    obj.update = update
-
-    def render(obj):
-        for i in range(0, obj.blobs.length):
-            ctx.save()
-            obj.blobs[i].render()
-            ctx.restore()
-
-    obj.render = render
-    return obj
-
-def Blob(x, y, z, radius, colour):
-    obj = object()
-    obj.origin = Vector3D(x, y, z)
-    obj.position = Vector3D(x, y, z)
-    obj.targetPos = Vector3D(x, y, z)
-    obj.originradius = radius
-    obj.radius = radius
-    obj.velocity = Vector3D(0, 0, 0)
-    obj.colour = colour
-    obj.friction = 0.75
-    obj.spring = 0.05
-
-    def update(obj):
-        obj.velocity.x += (obj.targetPos.x - obj.position.x) * obj.spring
-        obj.velocity.x *= obj.friction
-        obj.position.x += obj.velocity.x
-
-        obj.velocity.y += (obj.targetPos.y - obj.position.y) * obj.spring
-        obj.velocity.y *= obj.friction
-        obj.position.y += obj.velocity.y
-
-        dox = obj.origin.x - obj.position.x
-        doy = obj.origin.y - obj.position.y
-        d = Sqrt(dox * dox + doy * doy)
-
-        obj.targetPos.z = d / 150.0 + 1.0
-        obj.velocity.z += (obj.targetPos.z - obj.position.z) * obj.spring
-        obj.velocity.z *= obj.friction
-        obj.position.z += obj.velocity.z
-
-        obj.radius = obj.originradius * obj.position.z
-        if obj.radius < 1:
-            obj.radius = 1
-
-    obj.update = update
-
-
-    def render(obj):
-        ctx.fillStyle = obj.colour
-        ctx.beginPath()
-        ctx.arc(obj.position.x, obj.position.y, obj.radius, 0, TWOPI, True)
-        ctx.fill()
-
-    obj.render = render
-    return obj
-
-
-
-
-# get the canvas DOM element
-canvas = doc["canvas"]
-ctx = canvas.getContext("2d")
-width = canvas.width
-height = canvas.height
-
-# data structures - generate initial blobs
-blobList = BlobList()
-blobList.blobs = [
-  Blob(150, 160, 0, 90, "rgba(220,5,134,.9)"),
-  Blob(67,  136, 0, 34, "rgba(145,200,46,.9)"),
-  Blob(106, 74,  0, 22, "rgba(45,172,173,.9)"),
-  Blob(114, 52,  0, 10, "rgba(238,172,78,.75)"),
-  Blob(220, 82,  0, 56, "rgba(47,118,178,.9)"),
-  Blob(250, 138, 0, 43, "rgba(248,172,78,.9)"),
-  Blob(232, 232, 0, 25, "rgba(99,198,78,.9)"),
-  Blob(256, 222, 0, 10, "rgba(140,45,136,.9)"),
-  Blob(128, 244, 0, 36, "rgba(226,74,63,.9)"),
-  Blob(64,  188, 0, 10, "rgba(255,203,78,.9)")
-]
-
-def drawText(x, y, text, colour):
- ctx.fillStyle = colour
- ctx.fillText(text, x, y)
-
-def drawDisc(x, y, rad, colour):
-  ctx.fillStyle = colour
-  ctx.beginPath()
-  ctx.arc(x, y, rad, 0, TWOPI, true)
-  ctx.fill()
-
-# event handlers
-def mouseMove(e):
-  blobList.mousex = e.clientX
-  blobList.mousey = e.clientY
-canvas.addEventListener("mousemove", mouseMove, False)
-
-# requestAnimFrame shim
-def animframe():
-   for frame in ['requestAnimationFrame',
-                 'webkitRequestAnimationFrame',
-                 'mozRequestAnimationFrame'
-                 'oRequestAnimationFrame',
-                 'msRequestAnimationFrame']:
-      log(frame)
-      try:
-        return getattr(win,frame)
-      except:
-         pass
-   def timeoutFrame(callback, element):
-       timeout = win.setTimeout
-       timeout(callback, 1000 / 60.0)
-   return timeoutFrame
-
-requestAnimFrame = animframe()
-
-
-# init main animation loop
-def loop():
-  # compute canvas offset within parent window including page view position
-  el = canvas
-  global offsetx, offsety
-  offsetx = 0
-  offsety = 0
-  while True:
-     offsetx += el.offsetLeft
-     offsety += el.offsetTop
-     el = el.offsetParent
-     try:
-        el.offsetParent
-     except:
-        break
-
-  offsetx = offsetx - win.pageXOffset
-  offsety = offsety - win.pageYOffset
-
-  ctx.save()
-
-  # clear the left side of the card
-  # the right hand side is already rendered with fixed text
-  ctx.clearRect(0, 0, width, height)
-
-  # perform initial one time rendering of text etc.
-  ctx.save()
-  ctx.font = "Bold 12pt Arial"
-  ctx.restore()
-
-  # render each edge blob - which react to mouse movement
-  ctx.globalCompositeOperation = 'darker'
-  blobList.update()
-  blobList.render()
-
-  # render "eg" text overlay
-  ctx.globalCompositeOperation = 'source-over'
-  ctx.font = "Bold 100pt Arial"
-  ctx.fillStyle = "black"
-  ctx.fillText("SyPy", 96, 224)
-  ctx.restore()
-  requestAnimFrame(loop)
-
-requestAnimFrame(loop)
-
-</script>
-    <!-- Le styles -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
-
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="ico/favicon.png">
-  </head>
-
-  <body onLoad="brython()">
-
-
-
-
-    <!-- NAVBAR
-    ================================================== -->
-    
-
-
-    <!-- Carousel
-    ================================================== -->
-    <div id="myCarousel" class="carousel slide">
-      <div class="carousel-inner">
-        <div class="item active">
-          <img src="img/examples/slide-01.jpg" alt="">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>G'day, Bruce!</h1>
-              <h2 class="lead">Come along to our fabulous events!</h2>
-              <a class="btn btn-large btn-primary" href="#">Sign up today</a>
-            </div>
-          </div>
-        </div>
-      </div>
- 
-    </div><!-- /.carousel -->
-
-
-
-    <!-- Marketing messaging and featurettes
-    ================================================== -->
-    <!-- Wrap the rest of the page in another container to center all the content. -->
-
-    <div class="container marketing">
-
-      <!-- Three columns of text below the carousel -->
-      <div class="row">
-        <div class="span4">
-          <img class="img-rounded" src="img/logo.png">
-          <h1>SyPy</h1>
-          <h4>First Thursday of each month. Sign up on the <a href="http://sypy.eventbrite.com/">SyPy Eventbrite</a> page</h4>
-          <p><a class="btn btn-large" href="http://sypy.eventbrite.com/">View details &raquo;</a></p>
-        </div><!-- /.span4 -->
-        <div class="span4">
-          <img class="img-rounded" src="img/hack-night.png">
-          <h1>SyPy Hacknight</h1>
-          <h4>Third Tuesday of each month. Sign up on the <a href="http://sypy.eventbrite.com/">SyPy Eventbrite</a> page</h4>
-          <p><a class="btn btn-large" href="http://sypy.eventbrite.com/">View details &raquo;</a></p>
-        </div><!-- /.span4 -->
-        <div class="span4">
-          <img class="img-rounded" src="img/google.png">
-          <h1>Google Group</h1>
-          <h4>Yes, we have one. See updates about events and join the <a href="http://groups.google.com/forum/?fromgroups#!forum/sydneypython">discussions</a>.</h4>
-          <p><a class="btn btn-large" href="http://groups.google.com/forum/?fromgroups#!forum/sydneypython">View details &raquo;</a></p>
-        </div><!-- /.span4 -->
-      </div><!-- /.row -->
-
-<br/>
-
-        <div class="row">
-          <div class="span4">
-              <div style="border-style: none;border-width: 0;border-color: #FFFFFF;overflow: visible;"><div id="newsblock53848047" style="word-wrap: break-word; padding: 5px; background-color: #FFFFFF;">
-              <!-- DO NOT ALTER, REMOVE, OR IN ANY WAY TRY TO HIDE THE FOLLOWING TAG OR ITS CONTENTS OR BLASTCASTA WILL NOT FUNCTION PROPERLY. --><div align="center" style="font-size: 8pt;"><br /><a href="http://www.blastcasta.com/" style="text-decoration: none; color: #0000CC;" target="_top"><b>News Widgets &amp; Tickers</b><br />Powered by BlastCasta</a></div>
-              </div></div>
-
-              <script id="scrnewsblock53848047" type="text/javascript"></script>
-              <script type="text/javascript"> /* <![CDATA[ */
-              setTimeout('document.getElementById(\'scrnewsblock53848047\').src = (document.location.protocol == \'https:\' ? \'https\' : \'http\') + \'://www.poweringnews.com/newsjavascript.aspx?feedurl=https%3A//www.eventbrite.com/rss/user_list_events/4745229708&maxitems=-1&showfeedtitle=0&showtitle=1&showdate=1&showsummary=1&showauthor=0&showactionsbox=0&showrsslink=0&showcopyright=0&opennewwindow=0&inheritstyles=0&bgcolor=%23FFFFFF&titlefontsize=10&summaryfontsize=10&fontfamily=Arial%2CHelvetica&titlecolor=%230000CC&summarycolor=%23000000&sepstyle=none&sepcolor=%23A0A0A0&objectid=newsblock53848047\'', 500);
-               /* ]]> */ </script>
-          </div><!-- /.span4 -->
-          <div class="span4">
-              <div style="border-style: none;border-width: 0;border-color: #FFFFFF;overflow: hidden;"><div id="newsblock85106436" style="word-wrap: break-word; padding: 5px; background-color: #FFFFFF;">
-              <!-- DO NOT ALTER, REMOVE, OR IN ANY WAY TRY TO HIDE THE FOLLOWING TAG OR ITS CONTENTS OR BLASTCASTA WILL NOT FUNCTION PROPERLY. --><div align="center" style="font-size: 8pt;"><br /><a href="http://www.blastcasta.com/" style="text-decoration: none; color: #227DFF;" target="_top"><b>Get Your Twitter Widget</b><br />Powered by BlastCasta</a></div>
-              </div></div>
-              <script id="scrnewsblock85106436" type="text/javascript"></script>
-              <script type="text/javascript"> /* <![CDATA[ */
-              setTimeout('document.getElementById(\'scrnewsblock85106436\').src = (document.location.protocol == \'https:\' ? \'https\' : \'http\') + \'://www.poweringnews.com/newsjavascript.aspx?feedurl=http%3A//search.twitter.com/search.rss%3Fq%3D%2523sypy&maxitems=-1&showfeedtitle=0&showtitle=1&showdate=1&showsummary=1&showauthor=0&showactionsbox=0&showrsslink=0&showcopyright=0&opennewwindow=1&inheritstyles=0&bgcolor=%23FFFFFF&titlefontsize=10&summaryfontsize=10&fontfamily=Arial%2CHelvetica&titlecolor=%23227DFF&summarycolor=%23000000&sepstyle=dashed&sepcolor=%23D6D6D6&objectid=newsblock85106436\'', 500);
-               /* ]]> */ </script>
-          </div><!-- /.span4 -->
-          <div class="span4">
-              <iframe id="forum_embed"
- src="javascript:void(0)"
- scrolling="no"
- frameborder="0"
- width="300"
- height="400">
-</iframe>
-
-<script type="text/javascript">
- document.getElementById("forum_embed").src =
-  "https://groups.google.com/forum/embed/?place=forum/sydneypython" +
-  "&showsearch=false&showpopout=false&showtabs=false&hideforumtitle=true&hidesubject=true&parenturl=" +
-  encodeURIComponent(window.location.href);
-</script>
-          </div><!-- /.span4 -->
-        </div><!-- /.row -->
-
-
-
-      <!-- START THE FEATURETTES -->
-
-      <hr class="featurette-divider">
-
-      <div class="featurette">
-        <div class="pull-right">
-            <canvas id="canvas" width="560" height="320"></canvas>
-        </div>
-        <h2 class="featurette-heading">Python in the browser, <span class="muted">just because we can.</span></h2>
-        <p class="lead">Don't believe us? View source</p>
-      </div>
-
-      <hr class="featurette-divider">
-
-
-      <div class="featurette">
-        
-        <img class="featurette-image pull-right" src="img/billboard.jpg">
-        <h2 class="featurette-heading">Hey! <span class="muted">You know what?</span></h2>
-        <p class="lead">We can probably sell some sponsor space around here.</p>
-      </div>
-
-      <hr class="featurette-divider">
-
-      <!-- /END THE FEATURETTES -->
-
-
-      <!-- FOOTER -->
-      <footer>
-        <p class="pull-right"><a href="#">▲ Woosh!</a></p>
-        <p>&copy; 2012 SyPy. &middot; 
-          <a href="http://en.wikipedia.org/wiki/Privacy">Privacy</a> &middot; 
-          <a href="http://en.wikipedia.org/wiki/Terms_of_service">Terms</a></p>
-      </footer>
-
-
-    </div><!-- /.container -->
-
-
-
-
-  </body>
+<!--[if IE 7 ]><html class="ie7" lang="en"><![endif]-->
+<!--[if IE 8 ]><html class="ie8" lang="en"><![endif]-->
+<!--[if lte IE 9 ]><html class="ie9" lang="en"><![endif]-->
+<!--[if !(IE)]><!--><html lang="en"><!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<title>SyPy &ndash; Sydney Python</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css?v=2013-01-05-1706">
+	<script src="http://use.typekit.net/nej1hvo.js"></script>
+	<script>try{Typekit.load();}catch(e){}</script>
+	<!--[if lte IE 8 ]><script src="js/html5shiv.js"></script><![endif]-->
+</head>
+<body>
+	<div class="primary-container">
+		<header>
+			<h1>
+				SyPy
+			</h1>
+			<img src="images/monty-python-image.jpg" alt="Monty Python">
+		</header>
+		<section class="sydney-python">
+			<h1>Sydney Python</h1>
+			<p>
+				<strong>
+					First Thursday of each month.
+				</strong>
+			</p>
+			<p>
+				<a href="//maps.google.com/?q=Level+6,+341+George+St,+Sydney,+2000">
+					Level 6, 341 George St, Sydney. Atlassian
+				</a>
+			</p>
+			<p>
+				<a href="//sypy.eventbrite.com/">
+					Attend the next meeting
+				</a>
+			</p>
+		</section>
+		<section class="hacknight">
+			<h1>Hacknight</h1>
+			<p>
+				<strong>Third Tuesday of each month.</strong>
+			</p>
+			<p>
+				<a href="//maps.google.com/?q=608+Harris+St,+Ultimo+2007">
+					608 Harris St, Ultimo. Fishburners
+				</a>
+			</p>
+			<p>
+				<a href="//sypy.eventbrite.com/">
+					Attend the next meeting
+				</a>
+			</p>
+		</section>
+		<section class="mailing-list">
+			<h1>Mailing List</h1>
+			<p>
+				<a href="//groups.google.com/forum/#!forum/sydneypython">
+					Join the discussion
+				</a>
+			</p>
+		</section>
+		<div class="clear"></div>
+	</div>
+</body>
 </html>
