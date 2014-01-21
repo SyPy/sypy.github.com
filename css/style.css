@@ -1,4 +1,4 @@
-/* normalize.css v2.0.1 | MIT License | git.io/normalize */
+/*! normalize.css v2.0.1 | MIT License | git.io/normalize */
 /* ==========================================================================
    HTML5 display definitions
    ========================================================================== */
@@ -332,7 +332,7 @@ header {
   height: 16em;
   overflow: hidden; }
   header h1 {
-    font-family: "futura-pt", Helvetica, arial, sans-serif;
+    font-family: "Open Sans", Helvetica, arial, sans-serif;
     font-weight: 500;
     font-size: 7em;
     color: #f5de50;
@@ -345,8 +345,8 @@ header {
     z-index: 2; }
     @media (min-width: 300px) {
       header h1 {
-        font-size: 9em;
-        line-height: 1.5; } }
+        font-size: 8em;
+        line-height: 1.7; } }
     @media (min-width: 392px) {
       header h1 {
         font-size: 10em;
@@ -357,7 +357,7 @@ header {
         line-height: 1.1; } }
     @media (min-width: 1050px) {
       header h1 {
-        font-size: 19em;
+        font-size: 18em;
         line-height: 0.6; } }
   header img {
     min-height: 16em;
@@ -382,26 +382,26 @@ header {
         top: -11em; } }
 
 section {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #dedddd;
   padding: 0 0.5em 1em 0.5em;
   background: white;
   position: relative; }
   section:last-child {
     border-bottom: 0; }
   section h1 {
-    font-family: "futura-pt", Helvetica, arial, sans-serif;
-    font-size: 3em;
+    font-family: "Open Sans", Helvetica, arial, sans-serif;
+    font-size: 2.5em;
     font-weight: 300;
     text-align: center;
     line-height: 1;
     margin: 0.5em 0;
     color: black; }
   section p {
-    font-family: "futura-pt", Helvetica, arial, sans-serif;
+    font-family: "Open Sans", Helvetica, arial, sans-serif;
     margin: 0.25em 0 1em 0;
     padding: 0 1em;
     text-align: center;
-    font-size: 1.1em; }
+    font-size: 1em; }
     section p strong {
       font-weight: 400;
       font-size: 1.1em; }
@@ -409,7 +409,10 @@ section {
       color: #333;
       font-weight: 300;
       text-decoration: none;
-      border-bottom: 1px dashed #333; }
+      border-bottom: 1px dotted #aaa;
+      transition: border-bottom-color 0.75s; }
+      section p a:hover {
+        border-bottom-color: #000; }
 
 @media (min-width: 1050px) {
   header {
@@ -424,6 +427,7 @@ section {
     position: absolute;
     top: 3em;
     left: 62%;
+    padding: 2.4em 1em;
     z-index: 2;
     border: 0; }
 
@@ -435,7 +439,7 @@ section {
     float: left; }
 
   .hacknight {
-    border-right: 1px solid black;
+    border-right: 1px solid #dedddd;
     z-index: 2; }
 
   .mailing-list {

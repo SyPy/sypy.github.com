@@ -1,7 +1,7 @@
 @import 'constants';
 
-@mixin futura {
-	font-family: "futura-pt", Helvetica, arial, sans-serif;
+@mixin open-sans {
+	font-family: "Open Sans", Helvetica, arial, sans-serif;
 }
 
 body {
@@ -26,7 +26,7 @@ header {
 	height: $HEADER_HEIGHT;
 	overflow: hidden;
 	h1 {
-		@include futura;
+		@include open-sans;
 		font-weight: 500;
 		font-size: 7em;
 		color: $YELLOW;
@@ -38,8 +38,8 @@ header {
 		margin: 0;
 		z-index: 2;
 		@media (min-width: 300px) {
-			font-size: 9em;
-			line-height: 1.5;
+			font-size: 8em;
+			line-height: 1.7;
 		}
 		@media (min-width: 392px) {
 			font-size: 10em;
@@ -50,7 +50,7 @@ header {
 			line-height: 1.1;
 		}
 		@media (min-width: 1050px) {
-			font-size: 19em;
+			font-size: 18em;
 			line-height: 0.6;
 		}
 	}
@@ -79,7 +79,7 @@ header {
 }
 
 section {
-	border-bottom: 2px solid black;
+	border-bottom: 2px solid $BODY_BACKGROUND;
 	padding: 0 0.5em 1em 0.5em;
 	background: white;
 	position: relative;
@@ -87,8 +87,8 @@ section {
 		border-bottom: 0;
 	}
 	h1 {
-		@include futura;
-		font-size: 3em;
+		@include open-sans;
+		font-size: 2.5em;
 		font-weight: 300;
 		text-align: center;
 		line-height: 1;
@@ -96,11 +96,11 @@ section {
 		color: black;
 	}
 	p {
-		@include futura;
+		@include open-sans;
 		margin: 0.25em 0 1em 0;
 		padding: 0 1em;
 		text-align: center;
-		font-size: 1.1em;
+		font-size: 1em;
 		strong {
 			font-weight: 400;
 			font-size: 1.1em;
@@ -109,7 +109,11 @@ section {
 			color: #333;
 			font-weight: 300;
 			text-decoration: none;
-			border-bottom: 1px dashed #333;
+			border-bottom: 1px dotted #aaa;
+            transition: border-bottom-color 0.75s;
+            &:hover {
+              border-bottom-color: #000;
+            }
 		}
 	}
 }
@@ -129,6 +133,7 @@ section {
 		position: absolute;
 		top: 3em;
 		left: 62%;
+        padding: 2.4em 1em;
 		z-index: 2;
 		border: 0;
 	}
@@ -140,7 +145,7 @@ section {
 		float: left;
 	}
 	.hacknight {
-		border-right: 1px solid black;
+		border-right: 1px solid $BODY_BACKGROUND;
 		z-index: 2;
 	}
 	.mailing-list {
