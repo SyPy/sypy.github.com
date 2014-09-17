@@ -251,6 +251,33 @@ cursorToEnd()
 #doc['show_status'].bind('click', show_status)
 
 
+from datetime import datetime
+import calendar
+import math
+
+
+now = datetime.now()
+year, month = (now.year, now.month)
+
+day = calendar.monthcalendar(now.year, now.month)[0][3]
+
+print(day)
+
+if now.day > day:
+    year = int(2014+math.floor(11/12))
+    month = now.month % 12
+    day = calendar.monthcalendar(year, month)[0][3]
+
+print("Next Sypy is %s" % datetime(year, month, day))
+
+
+#TODO: print above code to the console + result
+
+
+
+write("print('hello')")
+
+
 </script>	
 	
 		</section>
