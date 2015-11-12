@@ -345,19 +345,19 @@ header {
     z-index: 2; }
     @media (min-width: 300px) {
       header h1 {
-        font-size: 8em;
+        font-size: 2em;
         line-height: 1.7; } }
     @media (min-width: 392px) {
       header h1 {
-        font-size: 10em;
+        font-size: 3em;
         line-height: 1.4; } }
     @media (min-width: 600px) {
       header h1 {
-        font-size: 12em;
+        font-size: 4em;
         line-height: 1.1; } }
     @media (min-width: 1050px) {
       header h1 {
-        font-size: 18em;
+        font-size: 5em;
         line-height: 0.6; } }
   header img {
     min-height: 16em;
@@ -418,7 +418,7 @@ section {
   header {
     height: 24em; }
     header h1 {
-      width: 50%;
+      width: 100%;
       top: 0.2em;
       left: 2%; }
 
@@ -431,14 +431,14 @@ section {
     z-index: 2;
     border: 0; }
 
-  .hacknight,
+  .group,
   .mailing-list {
-    width: 50%;
+    width: 100%;
     border-bottom: 0;
     padding: 0 0 1em 0;
     float: left; }
 
-  .hacknight {
+  .group {
     border-right: 1px solid #dedddd;
     z-index: 2; }
 
@@ -462,7 +462,7 @@ section {
     width: 50%;
     top: 0.2em;
     left: 5%;
-    font-size: 19em;
+    font-size: 5em;
     line-height: 0.6; }
   .ie7 header img,
   .ie8 header img {
@@ -475,16 +475,16 @@ section {
   left: 61%;
   z-index: 2;
   border: 0; }
-.ie7 .hacknight,
+.ie7 .group,
 .ie7 .mailing-list,
-.ie8 .hacknight,
+.ie8 .group,
 .ie8 .mailing-list {
   width: 50%;
   border-bottom: 0;
   padding: 0 0 1em 0;
   float: left; }
-.ie7 .hacknight,
-.ie8 .hacknight {
+.ie7 .group,
+.ie8 .group {
   border-right: 1px solid black;
   z-index: 2; }
 .ie7 .mailing-list,

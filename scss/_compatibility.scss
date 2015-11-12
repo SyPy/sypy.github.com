@@ -23,19 +23,19 @@
 		z-index: 2;
 		border: 0;
 	}
-	.hacknight,
+	.group,
 	.mailing-list {
 		width: 50%;
 		border-bottom: 0;
 		padding: 0 0 1em 0;
 		float: left;
 	}
-	.hacknight {
+	.group {
 		border-right: 1px solid black;
 		z-index: 2;
 	}
 	.mailing-list {
-		// Offset against .hacknight's border
+		// Offset against .group's border
 		margin-left: -2px;
 		z-index: 1;
 	}
