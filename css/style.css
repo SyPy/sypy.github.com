@@ -343,22 +343,39 @@ header {
     width: 100%;
     margin: 0;
     z-index: 2; }
+    header h1 {
+        background-image: url('../images/python-australia-logo.png');
+        background-position: left center;
+        background-repeat: no-repeat;
+        background-size: 200px 200px;
+    }
     @media (min-width: 300px) {
       header h1 {
-        font-size: 2em;
-        line-height: 1.7; } }
+        font-size: 4em;
+        line-height: 1.7;
+background-size: 50px 50px;
+        } }
     @media (min-width: 392px) {
       header h1 {
-        font-size: 3em;
-        line-height: 1.4; } }
+        font-size: 6em;
+        line-height: 1.4;
+background-size: 100px 100px;
+        } }
     @media (min-width: 600px) {
       header h1 {
-        font-size: 4em;
-        line-height: 1.1; } }
+        font-size: 8em;
+        line-height: 1.1;
+background-size: 150px 150px;
+        } }
     @media (min-width: 1050px) {
       header h1 {
-        font-size: 5em;
-        line-height: 0.6; } }
+        font-size: 15em;
+        line-height: 0.6;
+background-size: 200px 200px;
+      }
+
+
+       }
   header img {
     min-height: 16em;
     max-width: 100%;
@@ -380,6 +397,14 @@ header {
     @media (min-width: 1057px) {
       header img {
         top: -11em; } }
+
+header h1 > span {
+  display: block;
+  font-size: 0.25em;
+  padding-top: 2em;
+}
+
+
 
 section {
   border-bottom: 2px solid #dedddd;
