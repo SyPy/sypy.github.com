@@ -1,22 +1,26 @@
-from datetime import datetime
-import calendar
-import math
+from datetime import date, time, datetime, timedelta
 
-now = datetime.now()
-def next_date(week, day_of_week):
-    year, month = (now.year, now.month)
-    day = calendar.monthcalendar(now.year, now.month)[week][day_of_week]
-    if now.day > day:
-        year = int(2014 + math.floor(11/12))
-        month = now.month % 12 + 1
-        day = calendar.monthcalendar(year, month)[week][day_of_week]
-    return datetime(year, month, day, 18, 30)
+def date_of(weekday, incidence, month_within):
+    current_month = month_within.replace(day=1)
+    shift = (weekday - current_month.weekday()) % 7
+    return current_month + timedelta(days=shift, weeks=incidence)
 
-nights = [('SyPy', 0, 3), ('Hacknight', 2, 1), ('SyDjango', 3, 3)]
-for date, event in sorted([(next_date(week, day), event) for event, week, day in nights]):
-    print("Next %s:\t%s" % (event, date))
-
-# developed at hacknight 2014-10-16
+def next_date(weekday, incidence, after = None):
+    if after is None:
+        after = date.today()
+    this_month = date_of(weekday, incidence, after)
+    if this_month > after:
+        return this_month
+    else:
+        return date_of(weekday, incidence, after.replace(day=28) + timedelta(days=4))
 
 
+nights = [
+    ('SyPy', 0, 3, time(18)),
+    ('Hacknight', 2, 1, time(18)),
+    ('SyDjango', 3, 3, time(18))
+]
 
+upcoming = sorted((next_date(weekday, incidence), time, event) for event, incidence, weekday, time in nights)
+for date, time, event in upcoming:
+    print("Next %s:\t%s" % (event, datetime.combine(date, time)))
