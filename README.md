@@ -13,8 +13,8 @@ How To Contribute
    1. Maybe do it using some python.
 3. Make improvements to the html, js, css or **python** that form this website
 5. Test your changes.
+   * One way to do that, is to commit to your branch on the github.com, and turn on "GitHub pages" in the settings. This gives you a URL to view how the site will look.
 6. Test them again.
 7. Yes, we mean really really test them.
 6. Click "Create Pull request".
 7. Wait for us to review and merge.
-
